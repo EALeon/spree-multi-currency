@@ -13,7 +13,7 @@ module Spree
 
     default_scope { order('spree_currencies.locale') }
     scope :locale, ->(str) { where('locale like ?', "%#{str}%") }
-    after_save :reset_basic_currency
+    #after_save :reset_basic_currency
 
     # attr_accessible :basic, :locale, :char_code, :num_code, :name
 
