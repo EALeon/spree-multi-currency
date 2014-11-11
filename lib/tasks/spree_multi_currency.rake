@@ -24,7 +24,7 @@ namespace :spree_multi_currency do
       basic = Spree::Currency.find_by_basic(true)
       unless basic.present?
         basic  = Spree::Currency.get('643', { num_code: '643', char_code: 'RUB', name: 'Российский рубль', locale: 'ru' })
-        #basic.basic!
+        basic.basic!
       end
       url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=#{Time.now.strftime('%d/%m/%Y')}"
       basic_value = 1
@@ -68,7 +68,7 @@ namespace :spree_multi_currency do
       unless basic.present?
       
         basic = Spree::Currency.get('978', eur_hash)
-        #euro.basic!
+        basic.basic!
       end
       basic_value = 1
       currencies = []
