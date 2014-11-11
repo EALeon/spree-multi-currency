@@ -4,7 +4,7 @@ require 'open-uri'
 require 'nokogiri'
 # add custom rake tasks here
 namespace :spree_multi_currency do
-  eur_hash = { num_code: '978', char_code: 'EUR', name: 'Euro' }
+  eur_hash = { num_code: '978', char_code: 'EUR', name: 'Euro', locale: 'en' }
 
   namespace :currency do
     desc "Общероссийский классификатор валют (сокращ. ОКВ) - http://ru.wikipedia.org/wiki/Общероссийский_классификатор_валют"
@@ -23,8 +23,8 @@ namespace :spree_multi_currency do
     task :cbr => :environment do
       basic = Spree::Currency.find_by_basic(true)
       unless basic.present?
-        basic  = Spree::Currency.get('643', { num_code: '643', char_code: 'RUB', name: 'Российский рубль' })
-        basic.basic!
+        basic  = Spree::Currency.get('643', { num_code: '643', char_code: 'RUB', name: 'Российский рубль', locale: 'ru' })
+        #basic.basic!
       end
       url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=#{Time.now.strftime('%d/%m/%Y')}"
       basic_value = 1
@@ -67,8 +67,8 @@ namespace :spree_multi_currency do
       basic = Spree::Currency.find_by_basic(true)
       unless basic.present?
       
-        euro  = Spree::Currency.get('978', eur_hash)
-        euro.basic!
+        basic = Spree::Currency.get('978', eur_hash)
+        #euro.basic!
       end
       basic_value = 1
       currencies = []
