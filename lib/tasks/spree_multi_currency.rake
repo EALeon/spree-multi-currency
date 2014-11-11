@@ -21,7 +21,7 @@ namespace :spree_multi_currency do
   namespace :rates do
     desc 'Курс Сбербанка РФ http://www.cbr.ru'
     task :cbr => :environment do
-      basic = Spree::Currency.find_by_basic(1)
+      basic = Spree::Currency.find_by_basic(true)
       unless basic.present?
         basic  = Spree::Currency.get('643', { num_code: '643', char_code: 'RUB', name: 'Российский рубль' })
         basic.basic!
@@ -64,7 +64,7 @@ namespace :spree_multi_currency do
         Rake::Task['spree_multi_currency:currency:iso4217'].invoke
       end
       
-      basic = Spree::Currency.find_by_basic(1)
+      basic = Spree::Currency.find_by_basic(true)
       unless basic.present?
       
         euro  = Spree::Currency.get('978', eur_hash)
